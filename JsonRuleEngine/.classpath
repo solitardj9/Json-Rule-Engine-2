@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="jarLibrary"/>
+	<classpathentry kind="lib" path="jarLibrary/accessors-smart-1.2.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/commons-compiler-3.1.2.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/jackson-annotations-2.11.2.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/jackson-core-2.11.2.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/jackson-databind-2.11.2.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/janino-3.1.2.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/json-path-2.4.0.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/json-smart-2.3.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/jul-to-slf4j-1.7.30.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/slf4j-api-1.7.30.jar"/>
+	<classpathentry kind="lib" path="jarLibrary/slf4j-simple-1.7.30.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
