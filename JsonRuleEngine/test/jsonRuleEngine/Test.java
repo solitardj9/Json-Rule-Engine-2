@@ -1,6 +1,6 @@
 package jsonRuleEngine;
 
-import java.util.Map;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -133,7 +133,7 @@ public class Test {
 				"		}";
 		
 		String trigger3 = "{\r\n" + 
-				"			\"input\" : \"read($.[0])\",\r\n" + 
+				"			\"input\" : \"read($[0])\",\r\n" + 
 				"			\"condition\" : \"==\",\r\n" + 
 				"			\"value\" : 1\r\n" + 
 				"		}";
@@ -183,6 +183,10 @@ public class Test {
 			jsonRuleEngine.insertConfigs(jsonRuleEngineConfigs);
 			System.out.println(jsonRuleEngine.getConfigs().toString());
 			
+			List<String> jsonRetStringList = null;
+			
+			jsonRetStringList = jsonRuleEngine.execute(sampleJsonString1);
+			System.out.println(jsonRetStringList.toString());
 		} catch (JsonProcessingException e) {
 			logger.info(e.toString());
 		}
