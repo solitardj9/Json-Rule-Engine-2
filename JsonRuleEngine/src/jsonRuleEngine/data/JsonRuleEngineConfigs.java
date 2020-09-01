@@ -21,7 +21,12 @@ public class JsonRuleEngineConfigs {
 	}
 
 	public JsonRuleEngineConfigs(List<JsonRuleEngineConfig> configs) {
-		this.configs = configs;
+		//
+		this.configs = new ArrayList<>();
+		for (JsonRuleEngineConfig iter : configs) {
+			JsonRuleEngineConfig tmpConfig = new JsonRuleEngineConfig(iter);
+			this.configs.add(tmpConfig);
+		}
 	}
 
 	public List<JsonRuleEngineConfig> getConfigs() {
