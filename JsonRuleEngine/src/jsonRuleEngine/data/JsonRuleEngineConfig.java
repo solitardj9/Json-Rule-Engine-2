@@ -4,7 +4,7 @@ public class JsonRuleEngineConfig {
 	//
 	private Object trigger;
 	
-	private String result;
+	private Object result;
 	
 	public JsonRuleEngineConfig() {
 		
@@ -12,7 +12,7 @@ public class JsonRuleEngineConfig {
 	
 	public JsonRuleEngineConfig(JsonRuleEngineConfig object) {
 		setTrigger(object.getTrigger());
-		setResult(new String(object.getResult()));
+		setResult(object.getResult());
 	}
 
 	public JsonRuleEngineConfig(Object trigger, String result) {
@@ -28,11 +28,11 @@ public class JsonRuleEngineConfig {
 		this.trigger = trigger;
 	}
 
-	public String getResult() {
+	public Object getResult() {
 		return result;
 	}
 
-	public void setResult(String result) {
+	public void setResult(Object result) {
 		this.result = result;
 	}
 

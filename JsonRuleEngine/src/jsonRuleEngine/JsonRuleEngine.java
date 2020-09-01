@@ -12,5 +12,5 @@ public interface JsonRuleEngine {
 	
 	public JsonRuleEngineConfigs getConfigs();
 	
-	public List<String> execute(String jsonString);
+	public List<Object> execute(String jsonString);
 }
