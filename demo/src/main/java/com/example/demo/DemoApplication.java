@@ -27,7 +27,22 @@ public class DemoApplication {
 		
 		DataActionManager dataActionManager = ((DataActionManager)context.getBean("dataActionManager"));
 		
-		for (int i = 0 ; i < 3 ; i++)
+		for (int i = 0 ; i < 1 ; i++)
 			dataActionManager.checkAndDoAction(status);
+		
+		String status2 = "{\r\n" + 
+				"			\"data\": {\r\n" + 
+				"				\"onoff\": \"on\",\r\n" + 
+				"				\"setTemp\": 30,\r\n" + 
+				"				\"roomTemp\": 24,\r\n" + 
+				"				\"errorCode\": 10\r\n" + 
+				"			}\r\n" + 
+				"		}";
+		
+		String siteId = "2345";
+		String eqpId = "7890";
+		String eqpType = "ESS";
+		for (int i = 0 ; i < 1 ; i++)
+			dataActionManager.checkAndDoAction(siteId, eqpId, eqpType, status2);
 	}
 }

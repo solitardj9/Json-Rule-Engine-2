@@ -1,6 +1,7 @@
 package com.example.demo.dataActionMngtSet.dataActionMngt.service.impl;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,6 +21,7 @@ import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEn
 import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.JsonRuleEngineImpl;
 import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineConfig;
 import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineConfigs;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -80,9 +82,26 @@ public class DataActionManagerImpl implements DataActionManager {
     }
     
     @Override
-    public void checkAndDoAction(String parsingDataObj) {
+    public void checkAndDoAction(String message) {
         //
-        queue.add(parsingDataObj);
+        queue.add(message);
+    }
+    
+    @SuppressWarnings("unchecked")
+	public void checkAndDoAction(String siteId, String eqpId, String eqpType, String message) {
+    	//
+    	try {
+			Map<String, Object> map = om.readValue(message, Map.class);
+			map.put("siteId", siteId);
+			map.put("eqpId", eqpId);
+			map.put("eqpType", eqpType);
+			
+			String tmpMessage = om.writeValueAsString(map);
+			System.out.println("tmpMessage = " + tmpMessage);
+			checkAndDoAction(tmpMessage);
+		} catch (JsonProcessingException e) {
+			logger.error("[DataActionManager].checkAndDoAction : " + e.toString());
+		}
     }
     
     @Override

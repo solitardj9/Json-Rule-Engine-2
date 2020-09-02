@@ -8,5 +8,7 @@ public interface DataActionManager {
 	
 	public void checkAndDoAction(String message);
 	
+	public void checkAndDoAction(String siteId, String eqpId, String eqpType, String message);
+	
 	public JsonRuleEngineConfigs getJsonRuleEngineConfigs();
 }
