@@ -217,8 +217,8 @@ public class Test {
 		
 		
 		String status = "{\r\n" + 
-				"			\"siteID\": \"1234\",\r\n" + 
-				"			\"eqpID\": \"5678\",\r\n" + 
+				"			\"siteId\": \"1234\",\r\n" + 
+				"			\"eqpId\": \"5678\",\r\n" + 
 				"			\"eqpType\": \"ESS\",\r\n" + 
 				"			\"data\": {\r\n" + 
 				"				\"onoff\": \"on\",\r\n" + 
@@ -246,7 +246,7 @@ public class Test {
 				"	\"configs\" : [\r\n" + 
 				"		{\r\n" + 
 				"			\"trigger\" : " + triggerForError + ",\r\n" + 
-				"			\"result\" : {\"siteID\":\"read($.siteID)\", \"eqpID\":\"read($.eqpID)\", \"errorCode\":\"read($.data.errorCode)\"},\r\n" + 
+				"			\"result\" : {\"siteId\":\"read($.siteId)\", \"eqpId\":\"read($.eqpId)\", \"errorCode\":\"read($.data.errorCode)\"},\r\n" + 
 				"			\"event\" : {\"eventType\" : \"alarm\"}\r\n" +
 				"		}\r\n" +
 				"	]\r\n" + 
