@@ -27,7 +27,7 @@ public class DemoApplication {
 		
 		DataActionManager dataActionManager = ((DataActionManager)context.getBean("dataActionManager"));
 		
-		for (int i = 0 ; i < 1 ; i++)
+		for (int i = 0 ; i < 3 ; i++)
 			dataActionManager.checkAndDoAction(status);
 		
 		String status2 = "{\r\n" + 
@@ -42,7 +42,7 @@ public class DemoApplication {
 		String siteId = "2345";
 		String eqpId = "7890";
 		String eqpType = "ESS";
-		for (int i = 0 ; i < 1 ; i++)
+		for (int i = 0 ; i < 3 ; i++)
 			dataActionManager.checkAndDoAction(siteId, eqpId, eqpType, status2);
 	}
 }

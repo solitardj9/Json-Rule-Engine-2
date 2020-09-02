@@ -6,7 +6,7 @@ dataActionPluginMngt:
     httpClient:
       scheme: http
       url: 127.0.0.1:18087
-      path: error
+      path: vppService/error
       httpMethodType: put
       #queryParamConfigs: '{"queryParam1":"value1", "queryParam2":"value2"}'
       queryParamConfigs: '{}'
