@@ -18,9 +18,7 @@ import com.jayway.jsonpath.PathNotFoundException;
 
 import jsonRuleEngine.data.JsonRuleEngineConfig;
 import jsonRuleEngine.data.JsonRuleEngineConfigs;
-//import jsonRuleEngine.rule.RuleUtil;
-//import jsonRuleEngine.rule.Rules;
-//import jsonRuleEngine.rule.Rules.RULE;
+import jsonRuleEngine.data.JsonRuleEngineResultSet;
 
 public class JsonRuleEngineImpl implements JsonRuleEngine {
 	//
@@ -58,9 +56,9 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
 	}
 
 	@Override
-	public List<Object> execute(String jsonString) {
+	public List<JsonRuleEngineResultSet> execute(String jsonString) {
 		//
-		List<Object> retList = new ArrayList<>();
+		List<JsonRuleEngineResultSet> retList = new ArrayList<>();
 		DocumentContext context = JsonPath.parse(jsonString);
 		
 		for (JsonRuleEngineConfig iter : this.jsonRuleEngineConfigs.getConfigs()) {
@@ -69,7 +67,10 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
         	if (ret != null && ret.equals(true)) {
         		//
         		Object result = makeResult(iter.getResult(), context);
-        		retList.add(result);
+        		
+        		JsonRuleEngineResultSet jsonRuleEngineResultSet = new JsonRuleEngineResultSet(result, iter.getEvent());
+        		
+        		retList.add(jsonRuleEngineResultSet);
 	        }
 	    }
 		

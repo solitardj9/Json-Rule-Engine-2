@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jsonRuleEngine.data.JsonRuleEngineConfigs;
+import jsonRuleEngine.data.JsonRuleEngineResultSet;
 
 /**
  * reference :
@@ -123,27 +124,33 @@ public class Test {
 				"	\"configs\" : [\r\n" + 
 				"		{\r\n" + 
 				"			\"trigger\" : " + trigger1 + ",\r\n" + 
-				"			\"result\" : \"read($)\"\r\n" + 
+				"			\"result\" : \"read($)\",\r\n" + 
+				"			\"event\" : \"nothing to do\"\r\n" +
 				"		},\r\n" +
 				"		{\r\n" + 
 				"			\"trigger\" : " + trigger1 + ",\r\n" + 
-				"			\"result\" : \"read($.lastName)\"\r\n" + 
+				"			\"result\" : \"read($.lastName)\",\r\n" +
+				"			\"event\" : {\"eventType\" : \"alarm\"}\r\n" +
 				"		},\r\n" +
 				"		{\r\n" + 
 				"			\"trigger\" : " + trigger1 + ",\r\n" + 
-				"			\"result\" : \"ok\"\r\n" + 
+				"			\"result\" : \"ok\",\r\n" +
+				"			\"event\" : \"nothing to do\"\r\n" +
 				"		},\r\n" +
 				"		{\r\n" + 
 				"			\"trigger\" : " + trigger2 + ",\r\n" +
-				"			\"result\" : {\"type\":\"alarm\", \"info1\":\"read($.address.city)\", \"info2\":\"read($.address.postalCode)\", \"info3\":\"read($.age)\"}\r\n" +
+				"			\"result\" : {\"type\":\"alarm\", \"info1\":\"read($.address.city)\", \"info2\":\"read($.address.postalCode)\", \"info3\":\"read($.age)\"},\r\n" +
+				"			\"event\" : {\"eventType\" : \"alarm\"}\r\n" +
 				"		},\r\n" +
 				"		{\r\n" + 
 				"			\"trigger\" : " + trigger3 +",\r\n" +
-				"			\"result\" : \"read($.[2])\"\r\n" + 
+				"			\"result\" : \"read($.[2])\",\r\n" +
+				"			\"event\" : \"nothing to do\"\r\n" +
 				"		},\r\n" +
 				"		{\r\n" + 
 				"			\"trigger\" : " + trigger4 + ",\r\n" + 
-				"			\"result\" : \"read($.phoneNumber)\"\r\n" +
+				"			\"result\" : \"read($.phoneNumber)\",\r\n" +
+				"			\"event\" : \"nothing to do\"\r\n" +
 				"		}\r\n" + 
 				"	]\r\n" + 
 				"}";
@@ -158,7 +165,7 @@ public class Test {
 			jsonRuleEngine.insertConfigs(jsonRuleEngineConfigs);
 			System.out.println(jsonRuleEngine.getConfigs().toString());
 			
-			List<Object> jsonRetStringList = null;
+			List<JsonRuleEngineResultSet> jsonRetStringList = null;
 			
 			for (int i = 0 ; i < 1 ; i++) {
 				Long startTime = System.nanoTime();
@@ -239,7 +246,8 @@ public class Test {
 				"	\"configs\" : [\r\n" + 
 				"		{\r\n" + 
 				"			\"trigger\" : " + triggerForError + ",\r\n" + 
-				"			\"result\" : {\"siteID\":\"read($.siteID)\", \"eqpID\":\"read($.eqpID)\", \"errorCode\":\"read($.data.errorCode)\"}\r\n" + 
+				"			\"result\" : {\"siteID\":\"read($.siteID)\", \"eqpID\":\"read($.eqpID)\", \"errorCode\":\"read($.data.errorCode)\"},\r\n" + 
+				"			\"event\" : {\"eventType\" : \"alarm\"}\r\n" +
 				"		}\r\n" +
 				"	]\r\n" + 
 				"}";
@@ -249,7 +257,7 @@ public class Test {
 		JsonRuleEngine jsonRuleEngine = new JsonRuleEngineImpl();
 		jsonRuleEngine.insertConfigs(configs);
 		
-		List<Object> jsonRetStringList = jsonRuleEngine.execute(status);
+		List<JsonRuleEngineResultSet> jsonRetStringList = jsonRuleEngine.execute(status);
 		System.out.println(jsonRetStringList.toString());
 	}
 }

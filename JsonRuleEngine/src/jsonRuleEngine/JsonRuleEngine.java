@@ -3,6 +3,7 @@ package jsonRuleEngine;
 import java.util.List;
 
 import jsonRuleEngine.data.JsonRuleEngineConfigs;
+import jsonRuleEngine.data.JsonRuleEngineResultSet;
 
 public interface JsonRuleEngine {
 	
@@ -12,5 +13,5 @@ public interface JsonRuleEngine {
 	
 	public JsonRuleEngineConfigs getConfigs();
 	
-	public List<Object> execute(String jsonString);
+	public List<JsonRuleEngineResultSet> execute(String jsonString);
 }
