@@ -63,6 +63,9 @@ public class DataActionWorker implements Runnable {
     private void checkAndDoAction(String parsingDataObj) {
         //
     	if (jsonRuleEngine != null) {
+    		
+    		Long startTime = System.nanoTime();
+    		
     		List<JsonRuleEngineResultSet> results = jsonRuleEngine.execute(parsingDataObj);
     		
     		for (JsonRuleEngineResultSet iter : results) {
@@ -71,6 +74,11 @@ public class DataActionWorker implements Runnable {
     			
     			getDataActionPluginManager((String)iter.getEvent()).doActon(iter.getResult());
     		}
+    		
+    		Long endTime = System.nanoTime();
+			Long diffTime = endTime - startTime;
+			System.out.println("total time = " + diffTime + "(ns)");
+			System.out.println("total time = " + diffTime / 1000000 + "(ms)");
     	}
     }
     

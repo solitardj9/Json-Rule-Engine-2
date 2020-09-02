@@ -11,12 +11,11 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		//
-		//SpringApplication.run(DemoApplication.class, args);
 		ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 		
 		String status = "{\r\n" + 
-				"			\"siteID\": \"1234\",\r\n" + 
-				"			\"eqpID\": \"5678\",\r\n" + 
+				"			\"siteId\": \"1234\",\r\n" + 
+				"			\"eqpId\": \"5678\",\r\n" + 
 				"			\"eqpType\": \"ESS\",\r\n" + 
 				"			\"data\": {\r\n" + 
 				"				\"onoff\": \"on\",\r\n" + 
@@ -27,6 +26,8 @@ public class DemoApplication {
 				"		}";
 		
 		DataActionManager dataActionManager = ((DataActionManager)context.getBean("dataActionManager"));
-		dataActionManager.checkAndDoAction(status);
+		
+		for (int i = 0 ; i < 3 ; i++)
+			dataActionManager.checkAndDoAction(status);
 	}
 }

@@ -1,3 +1,13 @@
 
 dataActionMngt:
-  configs: '{"configs" : [{"trigger" : {"input" : {"input" : "read($.eqpType)", "condition" : "==", "value" : "ESS"}, "condition" : "&&", "value" : {"input" : "read($.data.errorCode)", "condition" : "!=", "value" : 0}}, "result" : {"siteID" : "read($.siteID)", "eqpID" : "read($.eqpID)", "errorCode" : "read($.data.errorCode)"}, "event" : "error"}]}'
+  configs: '{"configs" : [{"trigger" : {"input" : {"input" : "read($.eqpType)", "condition" : "==", "value" : "ESS"}, "condition" : "&&", "value" : {"input" : "read($.data.errorCode)", "condition" : "!=", "value" : 0}}, "result" : {"siteId" : "read($.siteId)", "eqpId" : "read($.eqpId)", "eqpType" : "read($.eqpType)", "errorCode" : "read($.data.errorCode)"}, "event" : "error"}]}'
+dataActionPluginMngt:
+  errorActionPlugin:
+    httpClient:
+      scheme: http
+      url: 127.0.0.1:18087
+      path: error
+      httpMethodType: put
+      #queryParamConfigs: '{"queryParam1":"value1", "queryParam2":"value2"}'
+      queryParamConfigs: '{}'
+      headerParamConfigs: '{"Content-Type":"application/json"}'
