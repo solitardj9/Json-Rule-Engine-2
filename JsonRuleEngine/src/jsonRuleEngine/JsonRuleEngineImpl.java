@@ -1,6 +1,7 @@
 package jsonRuleEngine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -234,21 +235,21 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
     	}
     }
     
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
 	private Object makeResult(Object result, DocumentContext context) {
     	//
     	Object ret = null;
+    	Object tmpResult = result;
  
     	logger.info("[JsonRuleEngine].makeResult : result = " + result);
 		try {
-			//System.out.println(result.getClass().toString());
-			if ((result instanceof String) && ((String)result).startsWith("read")) {
+			if ((tmpResult instanceof String) && ((String)tmpResult).startsWith("read")) {
 				//
-				ret = readDataFromJson(context, (String)result);
+				ret = readDataFromJson(context, (String)tmpResult);
 			}
-			else if (result instanceof Map) {
+			else if (tmpResult instanceof Map) {
 				//
-				Map<String, Object> map = (Map)result;
+				Map<String, Object> map = new HashMap((Map)tmpResult);
 				for (Entry<String, Object> entry : map.entrySet()) {
 					//
 					Object tmpObject = entry.getValue();
@@ -262,8 +263,9 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
 			}
 			else{
 				// nothing to do
-				ret = result;
+				ret = tmpResult;
 			}
+			
 		} catch (Exception e) {
 			logger.info("[JsonRuleEngine].makeResult : error = " + e.toString());
 			return null;
