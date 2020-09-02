@@ -1,7 +1,6 @@
-package com.example.demo.dataActionMngt.service;
+package com.example.demo.dataActionMngtSet.dataActionMngt.service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -16,8 +15,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dataActionMngt.model.DataActionConfig;
-import com.example.demo.dataActionMngt.model.DataActionConfigs;
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.JsonRuleEngine;
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.JsonRuleEngineImpl;
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineConfig;
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineConfigs;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -26,7 +27,7 @@ public class DataActionManagerImpl implements DataActionManager {
     //
     private static final Logger logger = LoggerFactory.getLogger(DataActionManagerImpl.class);
     
-    @Value("${test.configs}") 
+    @Value("${dataActionMngt.configs}") 
     private String strConfigs;
     
     private Integer workerPool = 1;
@@ -34,7 +35,7 @@ public class DataActionManagerImpl implements DataActionManager {
     @Autowired
     ApplicationContext applicationContext;
     
-    private DataActionConfigs configs;
+    private JsonRuleEngineConfigs configs;
     
     private BlockingQueue<String> queue = new LinkedBlockingQueue<String>();
     private ExecutorService executorService = null;
@@ -48,10 +49,10 @@ public class DataActionManagerImpl implements DataActionManager {
         //
         try {
             if (strConfigs != null && !strConfigs.equals("{}")) { 
-                configs = om.readValue(strConfigs, DataActionConfigs.class);
+                configs = om.readValue(strConfigs, JsonRuleEngineConfigs.class);
             }
             else {
-                configs = new DataActionConfigs(new ArrayList<DataActionConfig>());
+                configs = new JsonRuleEngineConfigs(new ArrayList<JsonRuleEngineConfig>());
             }
             
             logger.info("[DataActionManager] configs : " + configs.toString());
@@ -61,7 +62,11 @@ public class DataActionManagerImpl implements DataActionManager {
         
         executorService = Executors.newFixedThreadPool(workerPool);
         for(Integer i = 0 ; i < workerPool ; i++) {
-            DataActionWorker dataActionWorker = new DataActionWorker(this, queue, applicationContext);
+        	//
+        	JsonRuleEngine jsonRuleEngine = new JsonRuleEngineImpl();
+        	jsonRuleEngine.insertConfigs(configs);
+        	
+            DataActionWorker dataActionWorker = new DataActionWorker(this, queue, jsonRuleEngine, applicationContext);
             executorService.submit(dataActionWorker);
         }
         
@@ -79,8 +84,8 @@ public class DataActionManagerImpl implements DataActionManager {
         queue.add(parsingDataObj);
     }
     
-//    @Override
-//    public List<DataActionConfig> getDataActionConfigs() {
-//        return new ArrayList<DataActionConfig>(configs.getConfigs());
-//    }
+    @Override
+    public JsonRuleEngineConfigs getJsonRuleEngineConfigs() {
+        return this.configs;
+    }
 }

@@ -1,4 +1,4 @@
-package jsonRuleEngine;
+package com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +10,13 @@ import org.codehaus.janino.ExpressionEvaluator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineConfig;
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineConfigs;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
-
-import jsonRuleEngine.data.JsonRuleEngineConfig;
-import jsonRuleEngine.data.JsonRuleEngineConfigs;
-//import jsonRuleEngine.rule.RuleUtil;
-//import jsonRuleEngine.rule.Rules;
-//import jsonRuleEngine.rule.Rules.RULE;
 
 public class JsonRuleEngineImpl implements JsonRuleEngine {
 	//
@@ -80,7 +76,7 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
 	private Boolean isTriggered(Object trigger, DocumentContext context) {
 		
 		if (context == null) {
-			logger.info("[JsonRuleEngine].isTriggered : context is null");
+			//logger.info("[JsonRuleEngine].isTriggered : context is null");
 			return false;
 		}
 		
@@ -89,14 +85,14 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
 			Map<String, Object> triggerExpMap = om.readValue(om.writeValueAsString(trigger), Map.class);
 			String triggerExp = (String) makeExpression(triggerExpMap, context);
 			
-			logger.info("[JsonRuleEngine].isTriggered : triggerExp = " + triggerExp);
+			//logger.info("[JsonRuleEngine].isTriggered : triggerExp = " + triggerExp);
 			
 			if (triggerExp != null)
 				return evaluateTrigger(triggerExp);
 			else
 				return false;
 		} catch (JsonProcessingException e) {
-			logger.info("[JsonRuleEngine].isTriggered : error = " + e.toString());
+			//logger.info("[JsonRuleEngine].isTriggered : error = " + e.toString());
 			return false;
 		}
 	}
@@ -223,7 +219,7 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
     		
     		// Eventually we evaluate the expression - and that goes super-fast.
     		result = (Boolean) ee.evaluate(arrObjects);
-    		logger.info("[JsonRuleEngine].evaluateTrigger : result = " + result.toString());
+    		//logger.info("[JsonRuleEngine].evaluateTrigger : result = " + result.toString());
     		
     		return result;
     	}
@@ -239,7 +235,7 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
     	// TODO :
     	Object ret = null;
  
-    	logger.info("[JsonRuleEngine].makeResult : result = " + result);
+    	//logger.info("[JsonRuleEngine].makeResult : result = " + result);
 		try {
 			//System.out.println(result.getClass().toString());
 			if ((result instanceof String) && ((String)result).startsWith("read")) {
@@ -264,6 +260,7 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
 				// nothing to do
 				ret = result;
 			}
+			
 		} catch (Exception e) {
 			logger.info("[JsonRuleEngine].makeResult : error = " + e.toString());
 			return null;

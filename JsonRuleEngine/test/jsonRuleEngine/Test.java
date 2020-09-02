@@ -160,7 +160,7 @@ public class Test {
 			
 			List<Object> jsonRetStringList = null;
 			
-			for (int i = 0 ; i < 10 ; i++) {
+			for (int i = 0 ; i < 1 ; i++) {
 				Long startTime = System.nanoTime();
 				
 				jsonRetStringList = jsonRuleEngine.execute(sampleJsonString1);
@@ -207,5 +207,49 @@ public class Test {
 //				"value":"10"
 //			}
 //		}
+		
+		
+		String status = "{\r\n" + 
+				"			\"siteID\": \"1234\",\r\n" + 
+				"			\"eqpID\": \"5678\",\r\n" + 
+				"			\"eqpType\": \"ESS\",\r\n" + 
+				"			\"data\": {\r\n" + 
+				"				\"onoff\": \"on\",\r\n" + 
+				"				\"setTemp\": 30,\r\n" + 
+				"				\"roomTemp\": 24,\r\n" + 
+				"				\"errorCode\": 10\r\n" + 
+				"			}\r\n" + 
+				"		}";
+		
+		String triggerForError = "{\r\n" + 
+				"			\"input\" : {\r\n" + 
+				"				\"input\":\"read($.eqpType)\",\r\n" + 
+				"				\"condition\":\"==\",\r\n" + 
+				"				\"value\":\"ESS\"\r\n" + 
+				"			},\r\n" + 
+				"			\"condition\" : \"&&\",\r\n" + 
+				"			\"value\" : {\r\n" + 
+				"				\"input\":\"read($.data.errorCode)\",\r\n" + 
+				"				\"condition\":\"!=\",\r\n" + 
+				"				\"value\":0\r\n" + 
+				"			}\r\n" + 
+				"		}";
+		
+		String configs = "{\r\n" + 
+				"	\"configs\" : [\r\n" + 
+				"		{\r\n" + 
+				"			\"trigger\" : " + triggerForError + ",\r\n" + 
+				"			\"result\" : {\"siteID\":\"read($.siteID)\", \"eqpID\":\"read($.eqpID)\", \"errorCode\":\"read($.data.errorCode)\"}\r\n" + 
+				"		}\r\n" +
+				"	]\r\n" + 
+				"}";
+		
+		System.out.println("configs = " + configs);
+		
+		JsonRuleEngine jsonRuleEngine = new JsonRuleEngineImpl();
+		jsonRuleEngine.insertConfigs(configs);
+		
+		List<Object> jsonRetStringList = jsonRuleEngine.execute(status);
+		System.out.println(jsonRetStringList.toString());
 	}
 }
