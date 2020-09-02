@@ -237,7 +237,6 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
     @SuppressWarnings("unchecked")
 	private Object makeResult(Object result, DocumentContext context) {
     	//
-    	// TODO :
     	Object ret = null;
  
     	logger.info("[JsonRuleEngine].makeResult : result = " + result);

@@ -6,6 +6,8 @@ public class JsonRuleEngineConfig {
 	
 	private Object result;
 	
+	private Object event;
+	
 	public JsonRuleEngineConfig() {
 		
 	}
@@ -13,11 +15,13 @@ public class JsonRuleEngineConfig {
 	public JsonRuleEngineConfig(JsonRuleEngineConfig object) {
 		setTrigger(object.getTrigger());
 		setResult(object.getResult());
+		setEvent(object.getEvent());
 	}
 
-	public JsonRuleEngineConfig(Object trigger, String result) {
+	public JsonRuleEngineConfig(Object trigger, Object result, Object event) {
 		this.trigger = trigger;
 		this.result = result;
+		this.event = event;
 	}
 
 	public Object getTrigger() {
@@ -36,8 +40,16 @@ public class JsonRuleEngineConfig {
 		this.result = result;
 	}
 
+	public Object getEvent() {
+		return event;
+	}
+
+	public void setEvent(Object event) {
+		this.event = event;
+	}
+
 	@Override
 	public String toString() {
-		return "JsonRuleEngineConfig [trigger=" + trigger + ", result=" + result + "]";
+		return "JsonRuleEngineConfig [trigger=" + trigger + ", result=" + result + ", event=" + event + "]";
 	}
 }

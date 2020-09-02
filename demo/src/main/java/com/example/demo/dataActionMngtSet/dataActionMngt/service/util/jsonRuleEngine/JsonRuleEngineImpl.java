@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineConfig;
 import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineConfigs;
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineResultSet;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.DocumentContext;
@@ -54,9 +55,9 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
 	}
 
 	@Override
-	public List<Object> execute(String jsonString) {
+	public List<JsonRuleEngineResultSet> execute(String jsonString) {
 		//
-		List<Object> retList = new ArrayList<>();
+		List<JsonRuleEngineResultSet> retList = new ArrayList<>();
 		DocumentContext context = JsonPath.parse(jsonString);
 		
 		for (JsonRuleEngineConfig iter : this.jsonRuleEngineConfigs.getConfigs()) {
@@ -65,7 +66,10 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
         	if (ret != null && ret.equals(true)) {
         		//
         		Object result = makeResult(iter.getResult(), context);
-        		retList.add(result);
+        		
+        		JsonRuleEngineResultSet jsonRuleEngineResultSet = new JsonRuleEngineResultSet(result, iter.getEvent());
+        		
+        		retList.add(jsonRuleEngineResultSet);
 	        }
 	    }
 		
@@ -80,7 +84,7 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
 			return false;
 		}
 		
-		logger.info("[JsonRuleEngine].isTriggered : tmpTrigger = " + trigger);
+		//logger.info("[JsonRuleEngine].isTriggered : tmpTrigger = " + trigger);
 		try {
 			Map<String, Object> triggerExpMap = om.readValue(om.writeValueAsString(trigger), Map.class);
 			String triggerExp = (String) makeExpression(triggerExpMap, context);

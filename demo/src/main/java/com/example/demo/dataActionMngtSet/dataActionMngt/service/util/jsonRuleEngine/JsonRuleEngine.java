@@ -3,6 +3,7 @@ package com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleE
 import java.util.List;
 
 import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineConfigs;
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineResultSet;
 
 public interface JsonRuleEngine {
 	
@@ -12,5 +13,5 @@ public interface JsonRuleEngine {
 	
 	public JsonRuleEngineConfigs getConfigs();
 	
-	public List<Object> execute(String jsonString);
+	public List<JsonRuleEngineResultSet> execute(String jsonString);
 }

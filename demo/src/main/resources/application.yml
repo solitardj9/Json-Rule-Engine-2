@@ -1,3 +1,3 @@
 
 dataActionMngt:
-  configs: '{"configs" : [{"trigger" : {"input" : {"input" : "read($.eqpType)", "condition" : "==", "value" : "ESS"}, "condition" : "&&", "value" : {"input" : "read($.data.errorCode)", "condition" : "!=", "value" : 0}}, "result" : {"siteID" : "read($.siteID)", "eqpID" : "read($.eqpID)", "errorCode" : "read($.data.errorCode)"}}]}'
+  configs: '{"configs" : [{"trigger" : {"input" : {"input" : "read($.eqpType)", "condition" : "==", "value" : "ESS"}, "condition" : "&&", "value" : {"input" : "read($.data.errorCode)", "condition" : "!=", "value" : 0}}, "result" : {"siteID" : "read($.siteID)", "eqpID" : "read($.eqpID)", "errorCode" : "read($.data.errorCode)"}, "event" : "error"}]}'

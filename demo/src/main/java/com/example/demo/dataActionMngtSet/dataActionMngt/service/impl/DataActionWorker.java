@@ -1,4 +1,4 @@
-package com.example.demo.dataActionMngtSet.dataActionMngt.service;
+package com.example.demo.dataActionMngtSet.dataActionMngt.service.impl;
 
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -8,7 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.DataActionManager;
 import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.JsonRuleEngine;
+import com.example.demo.dataActionMngtSet.dataActionMngt.service.util.jsonRuleEngine.data.JsonRuleEngineResultSet;
+import com.example.demo.dataActionMngtSet.dataActionPluginMngt.model.DataActionPluginTypeEnum;
+import com.example.demo.dataActionMngtSet.dataActionPluginMngt.service.DataActionPluginManager;
 
 
 public class DataActionWorker implements Runnable {
@@ -59,11 +63,20 @@ public class DataActionWorker implements Runnable {
     private void checkAndDoAction(String parsingDataObj) {
         //
     	if (jsonRuleEngine != null) {
-    		List<Object> results = jsonRuleEngine.execute(parsingDataObj);
+    		List<JsonRuleEngineResultSet> results = jsonRuleEngine.execute(parsingDataObj);
     		
-//    		for (Object iter : results)
-//    			logger.info(iter.toString());
+    		for (JsonRuleEngineResultSet iter : results) {
+    			//
+    			logger.info(iter.toString());
+    			
+    			getDataActionPluginManager((String)iter.getEvent()).doActon(iter.getResult());
+    		}
     	}
+    }
+    
+    private DataActionPluginManager getDataActionPluginManager(String actionPluginType) {
+        //
+        return (DataActionPluginManager)applicationContext.getBean(DataActionPluginTypeEnum.getServiceName(actionPluginType));
     }
 
 	public void setInterrupt() {
