@@ -73,16 +73,16 @@ jsonRuleEngine.insertConfigs(configs);
 ###     2.2 Input Data Sample
 <pre>
 <code>
-    {
-        "data" : {
-            "onoff" : "on",
-            "setTemp" : 30,
-            "roomTemp" : 24,
-            "errorCode" : 10
-        },
-        "eqpId":"{eqpId}",
-        "eqpType":"AC"
-    }
+{
+	"data" : {
+		"onoff" : "on",
+		"setTemp" : 30,
+		"roomTemp" : 24,
+		"errorCode" : 10
+	},
+	"eqpId":"{eqpId}",
+	"eqpType":"AC"
+}
 </code>
 </pre>
 
@@ -98,22 +98,24 @@ List<JsonRuleEngineResultSet> results = jsonRuleEngine.execute(inputData);
 ###     2.4 Result Set Class
 <pre>
 <code>
-    public class JsonRuleEngineResultSet {
-		private Object result;
-		private Object event;
-        ...
-	}
+public class JsonRuleEngineResultSet {
+	private Object result;
+	private Object event;
+	...
+}
 </code>
 </pre>
 
 ###     2.5 Result Data Sampale
 <pre>
 <code>
+...
 for (JsonRuleEngineResultSet iter : results) {
 	logger.info(iter.toString());
 }
-		
-    JsonRuleEngineResultSet [result={"errorCode":10,"eqpId":"{eqpId}","eqpType":"AC"}, event=error]
+
+// print output
+JsonRuleEngineResultSet [result={"errorCode":10,"eqpId":"{eqpId}","eqpType":"AC"}, event=error]
 </code>
 </pre>
 
