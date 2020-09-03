@@ -109,6 +109,10 @@ List<JsonRuleEngineResultSet> results = jsonRuleEngine.execute(inputData);
 ###     2.5 Result Data Sampale
 <pre>
 <code>
+for (JsonRuleEngineResultSet iter : results) {
+	logger.info(iter.toString());
+}
+		
     JsonRuleEngineResultSet [result={"errorCode":10,"eqpId":"{eqpId}","eqpType":"AC"}, event=error]
 </code>
 </pre>
