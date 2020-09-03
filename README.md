@@ -27,6 +27,10 @@
 > example)
 <pre>
 <code>
+// this is a sample to trigger result and evnet when AC has a error code which is not equals to 0.
+// trigger is to compare equipment's type and error code.
+// result is json object.
+// event is simple string.
     {
         "configs" : [
             {
@@ -55,5 +59,60 @@
 </code>
 </pre>
 
+## 2. Examples
+###     2.1 Insert configuration
+<pre>
+<code>
+String configs = "{...}";
+
+JsonRuleEngine jsonRuleEngine = new JsonRuleEngineImpl();
+jsonRuleEngine.insertConfigs(configs);
+</code>
+</pre>
+
+###     2.2 Input Data Sample
+<pre>
+<code>
+    {
+        "data" : {
+            "onoff" : "on",
+            "setTemp" : 30,
+            "roomTemp" : 24,
+            "errorCode" : 10
+        },
+        "eqpId":"{eqpId}",
+        "eqpType":"AC"
+    }
+</code>
+</pre>
+
+###     2.3 Execute Rule Engine
+<pre>
+<code>
+String inputData = "{...}"
+
+List<JsonRuleEngineResultSet> results = jsonRuleEngine.execute(inputData);
+</code>
+</pre>
+
+###     2.4 Result Set Class
+<pre>
+<code>
+    public class JsonRuleEngineResultSet {
+		private Object result;
+		private Object event;
+        ...
+	}
+</code>
+</pre>
+
+###     2.5 Result Data Sampale
+<pre>
+<code>
+    JsonRuleEngineResultSet [result={"errorCode":10,"eqpId":"{eqpId}","eqpType":"AC"}, event=error]
+</code>
+</pre>
+
+	
 
 
