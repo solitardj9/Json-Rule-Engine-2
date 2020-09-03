@@ -11,12 +11,11 @@
 > > trigger : spepcific condition set using json document.
 > > > input : function to read value from json document.
 > > > > key path of json (reference : https://github.com/json-path/JsonPath).
-
 > > > operator : available logical operators with java style (>, >=, <, <=, ==, !=, &&, ||).
 > > > value : target value or function to read value from json document.
 > > result : Object or Json Object - can define a message which is output when trigger is activated.
 > > event : Object or Json Object - can define a event which is output when trigger is activated.
-    
+
 > example)
 <pre>
 <code>
