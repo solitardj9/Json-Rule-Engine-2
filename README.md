@@ -31,31 +31,31 @@
 // trigger is to compare equipment's type and error code.
 // result is json object.
 // event is simple string.
-    {
-        "configs" : [
-            {
-                "trigger" : {
-                    "input" : {
-                        "input" : "read($.eqpType)", 
-                        "operator" : "==", 
-                        "value" : "AC"
-                    }, 
-                    "operator" : "&&", 
-                    "value" : {
-                        "input" : "read($.data.errorCode)", 
-                        "operator" : "!=", 
-                        "value" : 0
-                    }
-                }, 
-                "result" : {
-                    "eqpId" : "read($.eqpId)", 
-                    "eqpType" : "read($.eqpType)", 
-                    "errorCode" : "read($.data.errorCode)"
-                }, 
-                "event" : "error"
-            }
-        ]
-    }
+{
+	"configs" : [
+		{
+			"trigger" : {
+				"input" : {
+					"input" : "read($.eqpType)", 
+					"operator" : "==", 
+					"value" : "AC"
+				}, 
+				"operator" : "&&", 
+				"value" : {
+					"input" : "read($.data.errorCode)", 
+					"operator" : "!=", 
+					"value" : 0
+				}
+			}, 
+			"result" : {
+				"eqpId" : "read($.eqpId)", 
+				"eqpType" : "read($.eqpType)", 
+				"errorCode" : "read($.data.errorCode)"
+			}, 
+			"event" : "error"
+		}
+	]
+}
 </code>
 </pre>
 
