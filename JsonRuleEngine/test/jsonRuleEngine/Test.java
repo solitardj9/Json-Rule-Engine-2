@@ -75,13 +75,13 @@ public class Test {
 		String trigger1 = "{\r\n" + 
 				"			\"input\" : {\r\n" + 
 				"				\"input\":\"read($.address.city)\",\r\n" + 
-				"				\"condition\":\"==\",\r\n" + 
+				"				\"operator\":\"==\",\r\n" + 
 				"				\"value\":\"New York\"\r\n" + 
 				"			},\r\n" + 
-				"			\"condition\" : \"&&\",\r\n" + 
+				"			\"operator\" : \"&&\",\r\n" + 
 				"			\"value\" : {\r\n" + 
 				"				\"input\":\"read($.age)\",\r\n" + 
-				"				\"condition\":\"==\",\r\n" + 
+				"				\"operator\":\"==\",\r\n" + 
 				"				\"value\":20\r\n" + 
 				"			}\r\n" + 
 				"		}";
@@ -89,33 +89,33 @@ public class Test {
 		String trigger2 = "{\r\n" + 
 				"			\"input\" : {\r\n" + 
 				"				\"input\":\"read($.phoneNumber[0].type)\",\r\n" + 
-				"				\"condition\":\"==\",\r\n" + 
+				"				\"operator\":\"==\",\r\n" + 
 				"				\"value\":\"home\"\r\n" + 
 				"			},\r\n" + 
-				"			\"condition\" : \"&&\",\r\n" + 
+				"			\"operator\" : \"&&\",\r\n" + 
 				"			\"value\" : {\r\n" + 
 				"				\"input\":\"read($.address.city)\",\r\n" + 
-				"				\"condition\":\"==\",\r\n" + 
+				"				\"operator\":\"==\",\r\n" + 
 				"				\"value\":\"Illinois\"\r\n" + 
 				"			}\r\n" + 
 				"		}";
 		
 		String trigger3 = "{\r\n" + 
 				"			\"input\" : \"read($[0])\",\r\n" + 
-				"			\"condition\" : \"==\",\r\n" + 
+				"			\"operator\" : \"==\",\r\n" + 
 				"			\"value\" : 1\r\n" + 
 				"		}";
 		
 		String trigger4 = "{\r\n" + 
 				"			\"input\" : {\r\n" + 
 				"				\"input\":\"read($.address.city)\",\r\n" + 
-				"				\"condition\":\"==\",\r\n" + 
+				"				\"operator\":\"==\",\r\n" + 
 				"				\"value\":\"Illinois\"\r\n" + 
 				"			},\r\n" + 
-				"			\"condition\" : \"&&\",\r\n" + 
+				"			\"operator\" : \"&&\",\r\n" + 
 				"			\"value\" : {\r\n" + 
 				"				\"input\":\"read($.age)\",\r\n" + 
-				"				\"condition\":\"==\",\r\n" + 
+				"				\"operator\":\"==\",\r\n" + 
 				"				\"value\":30\r\n" + 
 				"			}\r\n" + 
 				"		}";
@@ -194,23 +194,23 @@ public class Test {
 //		{
 //			"input" : {
 //				"input":"read(path)",
-//				"condition":"==",
+//				"operator":"==",
 //				"value":"10"
 //			},
-//			"condition" : "==",
+//			"operator" : "==",
 //			"value" : "10"
 //		}
 // Configuration Sample #2
 //		{
 //			"input" : {
 //				"input":"read(path)",
-//				"condition":"==",
+//				"operator":"==",
 //				"value":"10"
 //			},
-//			"condition" : "==",
+//			"operator" : "==",
 //			"value" : {
 //				"input":"read(path)",
-//				"condition":"==",
+//				"operator":"==",
 //				"value":"10"
 //			}
 //		}
@@ -231,13 +231,13 @@ public class Test {
 		String triggerForError = "{\r\n" + 
 				"			\"input\" : {\r\n" + 
 				"				\"input\":\"read($.eqpType)\",\r\n" + 
-				"				\"condition\":\"==\",\r\n" + 
+				"				\"operator\":\"==\",\r\n" + 
 				"				\"value\":\"ESS\"\r\n" + 
 				"			},\r\n" + 
-				"			\"condition\" : \"&&\",\r\n" + 
+				"			\"operator\" : \"&&\",\r\n" + 
 				"			\"value\" : {\r\n" + 
 				"				\"input\":\"read($.data.errorCode)\",\r\n" + 
-				"				\"condition\":\"!=\",\r\n" + 
+				"				\"operator\":\"!=\",\r\n" + 
 				"				\"value\":0\r\n" + 
 				"			}\r\n" + 
 				"		}";
