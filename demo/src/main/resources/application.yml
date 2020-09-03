@@ -1,6 +1,6 @@
 
 dataActionMngt:
-  configs: '{"configs" : [{"trigger" : {"input" : {"input" : "read($.eqpType)", "condition" : "==", "value" : "ESS"}, "condition" : "&&", "value" : {"input" : "read($.data.errorCode)", "condition" : "!=", "value" : 0}}, "result" : {"siteId" : "read($.siteId)", "eqpId" : "read($.eqpId)", "eqpType" : "read($.eqpType)", "errorCode" : "read($.data.errorCode)"}, "event" : "error"}]}'
+  configs: '{"configs" : [{"trigger" : {"input" : {"input" : "read($.eqpType)", "operator" : "==", "value" : "ESS"}, "operator" : "&&", "value" : {"input" : "read($.data.errorCode)", "operator" : "!=", "value" : 0}}, "result" : {"siteId" : "read($.siteId)", "eqpId" : "read($.eqpId)", "eqpType" : "read($.eqpType)", "errorCode" : "read($.data.errorCode)"}, "event" : "error"}]}'
 dataActionPluginMngt:
   errorActionPlugin:
     httpClient:

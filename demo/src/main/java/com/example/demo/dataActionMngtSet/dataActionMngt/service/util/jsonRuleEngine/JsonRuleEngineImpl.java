@@ -135,7 +135,7 @@ public class JsonRuleEngineImpl implements JsonRuleEngine {
 			}
 		}
 		
-		object = map.get("condition");
+		object = map.get("operator");
 		ret += object.toString();
 		
 		object = map.get("value");
